@@ -174,13 +174,4 @@ public class Attractor implements Supplier<Stream<double[]>> {
             return sbuf.toString();
         }
     }
-
-    public static void main( String[] args ) {
-        Random rnd = new Random( 456623 );
-        for ( int i = 0; i < 100; i++ ) {
-            Attractor attractor = clifford( randoms( rnd, 4, 2 ) );
-            System.out.println( getSpaceFraction( attractor, 100_000, 100 )
-                              + "\t" + attractor );
-        }
-    }
 }
