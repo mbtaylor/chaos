@@ -20,7 +20,7 @@ public class AttractorStarTable extends AbstractStarTable {
     public static final ValueInfo ATTRACTOR_INFO =
         new DefaultValueInfo( "Attractor", String.class );
 
-    public AttractorStarTable( Attractor att, int nrow ) {
+    public AttractorStarTable( Attractor att, long nrow ) {
         att_ = att;
         nrow_ = nrow;
         ndim_ = att.ndim_;
