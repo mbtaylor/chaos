@@ -20,9 +20,10 @@ build: jar
 jar: $(JARFILE)
 
 run: build
-	mkdir -p $(RESULT_DIR); \
+	mkdir -p $(RESULT_DIR)
 	cd $(RESULT_DIR); \
-	java -classpath $(JARFILE):$(STIL_JAR) ChaosWriter
+	java -classpath ../$(JARFILE):../$(STIL_JAR) \
+             ChaosWriter
 
 $(STIL_JAR):
 	curl -O 'http://andromeda.star.bris.ac.uk/~mbt/stil/stil.jar'
@@ -34,12 +35,12 @@ javadocs: $(JSRC)
                    -d javadocs $(JSRC) package-info.java
 
 clean:
-	rm -rf $(JARFILE) $(TEST_JARFILE) tmp \
-               index.html javadocs cdflist.html cdfdump.html \
-               $(ARTIFACTS) artifacts.zip \
+	rm -f $(JARFILE)
+	rm -rf tmp
 
 veryclean: clean
-	rm -f $(STIL_JAR) $(RESULT_DIR)
+	rm -f $(STIL_JAR)
+	rm -rf $(RESULT_DIR)
 
 $(JARFILE): $(JSRC) $(STIL_JAR)
 	rm -rf tmp
