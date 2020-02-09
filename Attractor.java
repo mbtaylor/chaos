@@ -29,7 +29,9 @@ public class Attractor implements Supplier<Stream<double[]>> {
     public static double[] randoms( Random rnd, int n, double absmax ) {
         double[] rnds = new double[ n ];
         for ( int i = 0; i < n; i++ ) {
-            rnds[ i ] = 2 * absmax * rnd.nextDouble() - absmax;
+            double r = 2 * absmax * rnd.nextDouble() - absmax;
+            r = (int) ( r * 100 ) / 100.;
+            rnds[ i ] = r;
         }
         return rnds;
     }
@@ -54,7 +56,7 @@ public class Attractor implements Supplier<Stream<double[]>> {
         };
     }
 
-    public static Attractor rampe3( double[] p6 ) {
+    public static Attractor rampe( double[] p6 ) {
         return new Attractor( 3, xyz -> {
             double x = xyz[ 0 ];
             double y = xyz[ 1 ];
@@ -72,8 +74,9 @@ public class Attractor implements Supplier<Stream<double[]>> {
         };
     }
 
-    public static double getSpaceFraction( Attractor att, int np, int nbin ) {
+    public static double getSpaceFraction( Attractor att, int nbin ) {
         int ndim = att.ndim_;
+        int np = (int) Math.pow( 2 * nbin, ndim );
         Bounds bounds =
             att.get().skip( 100 ).limit( np ) 
            .collect( () -> new Bounds( att.ndim_),
